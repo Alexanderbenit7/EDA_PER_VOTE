@@ -1,0 +1,107 @@
+---
+title: "Data cleaning"
+author: 'Daniel Encinas and Alexander Benites'
+date: "Jan 2023"
+subtitle: 'EDA Project'
+output:
+  pdf_document: default
+  html_document: default
+---
+
+#### 2021 Presidential Elections
+
+```{r}
+library(rio)
+data2021 = import("/Users/alexander/Desktop/Paper Map/Elect_data/EG2021_Resultados_Presidenciales.xlsx")
+```
+
+```{r}
+colnames(data2021) = c("ITEM","UBIGEO","DEPA","PROV","DIST","COD_POL","ORG_POL","VOTOS_OBTENIDOS","VOTOS_VALIDOS","VOTOS_BLANCO","VOTOS_NULOS","VOTOS_EMITIDOS","ELECT_HABILES")
+data2021 = data2021[-c(1:5),]
+data2021 = data2021[,-c(1)]
+row.names(data2021) = NULL
+```
+
+```{r}
+data2021$VOTOS_OBTENIDOS = as.numeric(data2021$VOTOS_OBTENIDOS)
+data2021$VOTOS_VALIDOS = as.numeric(data2021$VOTOS_VALIDOS)
+data2021$TASA_POL = data2021$VOTOS_OBTENIDOS/data2021$VOTOS_VALIDOS
+data2021$YEAR = 2021
+```
+
+
+#### 2016 Presidential Elections
+
+```{r}
+data2016 = import("/Users/alexander/Desktop/Paper Map/Elect_data/EG2016_Resultados_Presidenciales.xlsx")
+```
+
+```{r}
+colnames(data2016) = c("ITEM","UBIGEO","DEPA","PROV","DIST","COD_POL","ORG_POL","VOTOS_OBTENIDOS","VOTOS_VALIDOS","VOTOS_BLANCO","VOTOS_NULOS","VOTOS_EMITIDOS","ELECT_HABILES")
+data2016 = data2016[-c(1:5),]
+data2016 = data2016[,-c(1)]
+row.names(data2016) = NULL
+head(data2016)
+```
+
+```{r}
+data2016$VOTOS_OBTENIDOS = as.numeric(data2016$VOTOS_OBTENIDOS)
+data2016$VOTOS_VALIDOS = as.numeric(data2016$VOTOS_VALIDOS)
+data2016$TASA_POL = data2016$VOTOS_OBTENIDOS/data2016$VOTOS_VALIDOS
+data2016$YEAR = 2016
+```
+
+
+#### 2011 Presidential Elections
+
+```{r}
+data2011 = import("/Users/alexander/Desktop/Paper Map/Elect_data/EG2011_Resultados_Presidenciales.xlsx")
+```
+
+```{r}
+colnames(data2011) = c("ITEM","UBIGEO","DEPA","PROV","DIST","COD_POL","ORG_POL","VOTOS_OBTENIDOS","VOTOS_VALIDOS","VOTOS_BLANCO","VOTOS_NULOS","VOTOS_EMITIDOS","ELECT_HABILES")
+data2011 = data2011[-c(1:5),]
+data2011 = data2011[,-c(1)]
+row.names(data2011) = NULL
+head(data2011)
+```
+
+```{r}
+data2011$VOTOS_OBTENIDOS = as.numeric(data2011$VOTOS_OBTENIDOS)
+data2011$VOTOS_VALIDOS = as.numeric(data2011$VOTOS_VALIDOS)
+data2011$TASA_POL = data2011$VOTOS_OBTENIDOS/data2011$VOTOS_VALIDOS
+data2011$YEAR = 2011
+```
+
+
+
+#### 2006 Presidential Elections
+
+```{r}
+data2006 = import("/Users/alexander/Desktop/Paper Map/Elect_data/EG2006_Resultados_Presidenciales.xlsx")
+```
+
+```{r}
+colnames(data2006) = c("ITEM","UBIGEO","DEPA","PROV","DIST","COD_POL","ORG_POL","VOTOS_OBTENIDOS","VOTOS_VALIDOS","VOTOS_BLANCO","VOTOS_NULOS","VOTOS_EMITIDOS","ELECT_HABILES")
+data2006 = data2006[-c(1:5),]
+data2006 = data2006[,-c(1)]
+row.names(data2006) = NULL
+head(data2006)
+```
+
+```{r}
+data2006$VOTOS_OBTENIDOS = as.numeric(data2006$VOTOS_OBTENIDOS)
+data2006$VOTOS_VALIDOS = as.numeric(data2006$VOTOS_VALIDOS)
+data2006$TASA_POL = data2006$VOTOS_OBTENIDOS/data2006$VOTOS_VALIDOS
+data2006$YEAR = 2006
+```
+
+
+#### Final data
+
+```{r}
+data = rbind(data2021, data2016)
+data = rbind(data, data2011)
+data = rbind(data, data2006)
+```
+
